@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/custom.css";
-
-const API_URL = "http://localhost:3000/api/service"; // Update with your backend API URL
+ // Update with your backend API URL
 
 function Services() {
+  const API_URL = process.env.REACT_APP_API_URL + "/api/service"; 
   const [services, setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);

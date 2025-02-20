@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
+  const API_URL = process.env.REACT_APP_API_URL + "/api/user"; 
   const [formData, setFormData] = useState({ 
     username: '', 
     password: '', 
@@ -19,7 +20,7 @@ const Register = () => {
         throw new Error('Password must be at least 8 characters');
       }
 
-      const response = await axios.post('http://localhost:3000/api/user/register', {
+      const response = await axios.post(`${API_URL}/register`, {
         username: formData.username,
         password: formData.password,
         role: formData.role

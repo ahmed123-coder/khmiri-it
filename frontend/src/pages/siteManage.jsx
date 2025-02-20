@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import Sidebaradmin from "../components/sidebaradmin";
 import "../styles/siteManage.css";
 
-const API_URL = "http://localhost:3000/api/site";
 
 const ManageSites = () => {
+  const API_URL = process.env.REACT_APP_API_URL + "/api/site"; 
   const [sites, setSites] = useState([]);
   const [formData, setFormData] = useState({
     siteName: "",

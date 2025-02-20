@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/custom.css";
 
-const API_URL = "http://localhost:3000/api/project"; // Update with your backend API URL
-
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_URL = process.env.REACT_APP_API_URL + "/api/project"; 
 
   useEffect(() => {
     fetchProjects();

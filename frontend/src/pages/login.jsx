@@ -6,13 +6,14 @@ import "../styles/loginregister.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const API_URL = process.env.REACT_APP_API_URL + "/api/user/login"; 
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/user/login', formData);
+      const response = await axios.post(API_URL, formData);
       localStorage.setItem('token', response.data.token);
       
       // Redirect based on role

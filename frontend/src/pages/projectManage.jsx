@@ -5,6 +5,7 @@ import "../styles/projectManage.css";
 
 const ManageProjects = () => {
   const [projects, setProjects] = useState([]);
+  const API_URL = process.env.REACT_APP_API_URL + "/api/project"; 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
@@ -16,7 +17,7 @@ const ManageProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/project");
+      const res = await axios.get(API_URL);
       setProjects(res.data);
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -32,11 +33,11 @@ const ManageProjects = () => {
 
     try {
       if (editingId) {
-        await axios.put(`http://localhost:3000/api/project/${editingId}`, formData, {
+        await axios.put(`${API_URL}${editingId}`, formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
       } else {
-        await axios.post("http://localhost:3000/api/project", formData, {
+        await axios.post(API_URL, formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
       }
@@ -52,7 +53,7 @@ const ManageProjects = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/project/${id}`, {
+      await axios.delete(`${API_URL}${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       fetchProjects();

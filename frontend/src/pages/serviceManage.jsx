@@ -4,6 +4,7 @@ import Sidebaradmin from "../components/sidebaradmin";
 import "../styles/manageservice.css";
 
 const ServiceManager = () => {
+  const API_URL = process.env.REACT_APP_API_URL + "/api/service"; 
   const [services, setServices] = useState([]);
   const [editingService, setEditingService] = useState(null);
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const ServiceManager = () => {
   const fetchServices = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:3000/api/service");
+      const response = await axios.get(API_URL);
       setServices(response.data);
     } catch (error) {
       console.error("Error fetching services:", error);
@@ -33,7 +34,7 @@ const ServiceManager = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this service?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/service/${id}`, {
+        await axios.delete(`${API_URL}/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         fetchServices();
@@ -72,9 +73,9 @@ const ServiceManager = () => {
       };
 
       if (editingService) {
-        await axios.put(`http://localhost:3000/api/service/${editingService}`, formPayload, config);
+        await axios.put(`${API_URL}/${editingService}`, formPayload, config);
       } else {
-        await axios.post("http://localhost:3000/api/service", formPayload, config);
+        await axios.post(API_URL, formPayload, config);
       }
 
       setEditingService(null);

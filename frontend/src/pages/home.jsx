@@ -9,7 +9,7 @@ import Projects from "./projects";
 import Contact from "./contact";
 import Footer from "../components/footer";
 
-const API_URL = "http://localhost:3000/api/site/selected"; // تأكد من تحديث رابط الـ API
+const API_URL = process.env.REACT_APP_API_URL + "/api/site/selected"; // تأكد من تحديث رابط الـ API
 
 function Home() {
   const [siteData, setSiteData] = useState(null);
